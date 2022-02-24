@@ -1,16 +1,10 @@
 
 --Death percentage if infected with covid in india during Third_wave
-select continent, location, date, total_deaths, total_cases, round(((total_deaths/total_cases)*100),2) as death_percentage_if_infected_in_Third_wave
+select continent, location, convert(date,date) as date, total_deaths, total_cases, round(((total_deaths/total_cases)*100),2) as death_percentage_if_infected_in_Third_wave, round(((total_deaths/population)*100),3) as covid_death_by_population_in_Third_wave
 from dbo.covid_deaths
 where location = 'India'
 and date between '2022-01-01' and '2022-02-04' 
 
-
---Possibility of death by covid-19 during third wave in india
-select continent, location, date, population, total_cases, round(((total_deaths/population)*100),3) as covid_death_by_population_in_Third_wave
-from dbo.covid_deaths
-where location = 'India'
-and date between '2022-01-01' and '2022-02-04'
 
 --possibilty of contracting covid 19 in each country 
 select location, population, max(total_cases) as Maximum_infected_count , max(round(((total_cases/population)*100),3)) as Possibility_of_contracting_covid19_in_each_country
